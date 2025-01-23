@@ -1,6 +1,6 @@
 class Piece
 
-  attr_accessor :is_clicked
+  attr_accessor :is_clicked, :color
   
   def initialize(square = nil)
     @square = square

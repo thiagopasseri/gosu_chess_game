@@ -1,12 +1,13 @@
 require_relative 'square'
 
 class Board
-  attr_accessor :squares, :highlight_img, :clicked_piece
+  attr_accessor :squares, :highlight_img, :clicked_piece, :player_turn
 
   def initialize(pieces = nil)
     @squares = generate_squares
     @highlight_img = Gosu::Image.new 'media/small_center_circle.png'
     @clicked_piece = nil
+    @player_turn = 'white'
   end
 
   def generate_squares
