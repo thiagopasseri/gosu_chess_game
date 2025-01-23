@@ -41,22 +41,30 @@ class ChessGame < Gosu::Window
     @board.squares.flatten.each do |square|
       if mouse_over_area?(*square.rect)
         puts "board.clicked_piece: #{@board.clicked_piece.class} -possible_moves: #{@board.clicked_piece&.possible_moves} "
-        if @board.clicked_piece && @board.clicked_piece&.possible_moves&.include?(square)
-          @board.clicked_piece.move(square) 
-          square.piece.is_clicked = false
-          @board.clicked_piece = nil
-        else
-          if square.piece&.is_clicked
+        if @board.clicked_piece
+          if @board.clicked_piece&.possible_moves&.include?(square)
+            @board.clicked_piece.move(square) 
             square.piece.is_clicked = false
             @board.clicked_piece = nil
           elsif square.piece
-            square.piece.is_clicked = true 
+            @board.clicked_piece.is_clicked = false
+            square.piece.is_clicked = true
             @board.clicked_piece = square.piece
+          else
+            square.piece.is_clicked = false if square.piece
+            @board.clicked_piece = nil
           end
+        elsif square.piece
+          square.piece.is_clicked = true
+          @board.clicked_piece = square.piece
         end
       end
     end
   end
+
+  #fazer essa logica pro click passar de uma peça pra outra
+
+  
 
 end
 

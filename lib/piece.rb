@@ -6,7 +6,7 @@ class Piece
     @square = square
     @color = get_color
     @is_clicked = false
-
+    @image = nil
   end
 
   def get_color
@@ -49,10 +49,15 @@ class Piece
     end_square.piece = self
   end
 
+
+  def draw
+    @image&.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
+  end
+
   def draw_possible_moves
     if is_clicked
       possible_moves&.each do |square|
-        @board.highlight_img.draw(square.position[0], square.position[1], 2, 0.0488, 0.0488, Gosu::Color::WHITE, :additive)
+        @square.board.highlight_img.draw(square.position[0], square.position[1], 2, 0.0488, 0.0488, Gosu::Color::WHITE, :additive)
       end
     end
   end

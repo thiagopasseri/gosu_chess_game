@@ -66,16 +66,9 @@ class Square
     draw_square
     draw_highlight(COR_GREEN) if @piece&.is_clicked
     @piece&.draw
-    draw_possible_moves
+    @piece&.draw_possible_moves
   end
 
-  def draw_possible_moves
-    if @piece&.is_clicked
-      @piece.possible_moves&.each do |square|
-        @board.highlight_img.draw(square.position[0], square.position[1], 2, 0.0488, 0.0488, Gosu::Color::WHITE, :additive)
-      end
-    end
-  end
 
   def draw_rect_outline(x, y, width, height, color, z=0, mode=:default, thickness=2)
     thickness.times do |i|
