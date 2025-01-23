@@ -57,7 +57,6 @@ class Piece
     end
   end
 
-  
 
   def possible_moves
     raise NotImplementedError, "As classes filhas devem implementar este método"

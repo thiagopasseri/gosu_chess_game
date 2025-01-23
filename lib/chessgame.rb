@@ -5,7 +5,7 @@ class ChessGame < Gosu::Window
     super 640, 480
     self.caption = "Meu Jogo com Gosu"
     @board = Board.new
-    @piece = @board.squares[6][0].piece
+
   end
 
   def draw
@@ -25,32 +25,36 @@ class ChessGame < Gosu::Window
     case button_id
     when Gosu::KB_ESCAPE
       close
+
     when Gosu::KB_SPACE
-      # @board.squares[6][0].piece.move(@board.squares[5][0])
       @piece.move(@piece.seen_square([-1,0]))
 
     when Gosu::MS_LEFT # Verifica botão esquerdo do mouse
-      @board.squares.flatten.each do |square|
-        if mouse_over_area?(*square.rect)
-          if @board.clicked_piece
-            puts "teste"
-            @board.clicked_piece.move(square)
-            square.piece.is_clicked = false
-            @board.clicked_piece = nil
-          else
-            if square.piece&.is_clicked
-              square.piece.is_clicked = false
-              @board.clicked_piece = nil
-            elsif square.piece
-              square.piece.is_clicked = true 
-              @board.clicked_piece = square.piece
-            end
-          end
+        manage_mouse_click
 
-        end
-      end
     else
       super
+    end
+  end
+
+  def manage_mouse_click
+    @board.squares.flatten.each do |square|
+      if mouse_over_area?(*square.rect)
+        puts "board.clicked_piece: #{@board.clicked_piece.class} -possible_moves: #{@board.clicked_piece&.possible_moves} "
+        if @board.clicked_piece && @board.clicked_piece&.possible_moves&.include?(square)
+          @board.clicked_piece.move(square) 
+          square.piece.is_clicked = false
+          @board.clicked_piece = nil
+        else
+          if square.piece&.is_clicked
+            square.piece.is_clicked = false
+            @board.clicked_piece = nil
+          elsif square.piece
+            square.piece.is_clicked = true 
+            @board.clicked_piece = square.piece
+          end
+        end
+      end
     end
   end
 
