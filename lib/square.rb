@@ -79,6 +79,18 @@ class Square
     end
   end
 
+  # def row
+  #   @board.squares[@row]
+  # end
+
+  def column
+    group = []
+    @board.squares.each do |row|
+      group << row[@col]
+    end
+    group
+  end
+
   def draw_square
     Gosu.draw_rect(
       position[0],

@@ -1,6 +1,6 @@
 class Piece
 
-  attr_accessor :is_clicked, :color
+  attr_accessor :is_clicked, :color, :square
   
   def initialize(square = nil)
     @square = square
@@ -41,12 +41,12 @@ class Piece
   end
 
   def move(end_square)
+
     puts "end_square - [#{end_square.row}][#{end_square.col}] - #{end_square.piece.class}"
-    return nil if end_square.piece != nil
 
     @square.piece = nil
     @square = end_square
-    end_square.piece = self
+    end_square.piece = self 
   end
 
 
