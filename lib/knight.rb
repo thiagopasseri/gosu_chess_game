@@ -3,17 +3,24 @@ class Knight < Piece
   def initialize(square = nil)
     super
     @image = @color == 'white' ? Gosu::Image.new('media/Chess_nlt60.png') : Gosu::Image.new('media/Chess_ndt60.png')
-    @mov_vectors = [[2, 1], [2, -1], [1, 2], [-1, 2] ,[1, -2] ,[-1, -2], [-2, 1], [-2, -1]]
+    # @mov_vectors = [[2, 1], [2, -1], [1, 2], [-1, 2] ,[1, -2] ,[-1, -2], [-2, 1], [-2, -1]]
   end
 
 
-  def possible_moves
+  def seen_squares
     moves = []
     ChessTools.get_knight_moves_coord(@square.row, @square.col).each do |row, column|
-      moves << get_square(row, column)
+      target_square = get_square(row, column)
+      moves << target_square if target_square.piece&.color != @color
     end
     moves
   end
+
+  def possible_moves 
+    seen_squares
+  end
+
+
 
 
   # def possible_moves
