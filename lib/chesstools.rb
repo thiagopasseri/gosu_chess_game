@@ -38,41 +38,26 @@ module ChessTools
     line
   end
 
+  def self.get_knight_moves_coord(row, column)
+    arr = []
+    [-2, 2].each do |big_step|
+      [-1, 1].each do |small_step|
+        # variables for taking the big step horizontaly or verticaly
+        x_big_step_row = row + big_step
+        x_big_step_column = column + small_step
+        y_big_step_row = row + small_step
+        y_big_step_column = column + big_step
 
-  # def self.get_double_diagonal(row, column)
-  #   arr = [[row, column]]
+        arr << [x_big_step_row, x_big_step_column] if in_board?(x_big_step_row, x_big_step_column)
+        arr << [y_big_step_row, y_big_step_column] if in_board?(y_big_step_row, y_big_step_column)
+      end
+    end
+    arr
+  end
 
-  #   step = 1
-  #   #esquerda cima
-  #   while row - step >= 0 && column - step >= 0 do
-  #     arr << [row - step, row - step, "a"]
-  #     step += 1
-  #   end   
-    
-  #   step = 1
-
-  #   #direita baixo 
-  #   while row + step <=7 && column + step <= 7 do
-  #     arr << [row + step, column + step, "b"]
-  #     step += 1
-  #   end
-
-  #   step = 1
-  #   #esquerda baixo
-  #   while row + step <= 7 && column - step >= 0 do
-  #     arr << [row + step, column - step, "c"]
-  #     step += 1
-  #   end 
-
-  #   step = 1
-  #   #direita cima
-  #   while row - step >= 0 && column + step <= 7 do
-  #     arr << [row - step, column + step, "d"]
-  #     step += 1
-  #   end 
-  #   arr
-  # end
-
+  def self.in_board?(row, column)
+    row.between?(0,7) && column.between?(0,7)
+  end
 
 
 end

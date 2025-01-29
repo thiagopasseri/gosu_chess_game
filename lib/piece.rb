@@ -32,13 +32,13 @@ class Piece
     end
   end
 
-  def seen_squares(group)
-    squares = []
-    group.each do |vector|
-      squares << seen_square(vector)
-    end
-    squares
-  end
+  # def seen_squares(group)
+  #   squares = []
+  #   group.each do |vector|
+  #     squares << seen_square(vector)
+  #   end
+  #   squares
+  # end
 
   def move(end_square)
 
