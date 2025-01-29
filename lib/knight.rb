@@ -6,10 +6,6 @@ class Knight < Piece
     @mov_vectors = [[2, 1], [2, -1], [1, 2], [-1, 2] ,[1, -2] ,[-1, -2], [-2, 1], [-2, -1]]
   end
 
-  # def draw
-  #   @image.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
-  # end
-
   def possible_moves
     moves = []
     @mov_vectors.each do |vector|

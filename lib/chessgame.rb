@@ -62,10 +62,6 @@ class ChessGame < Gosu::Window
       end
     end
   end
-
-
-  
-
 end
 
 

@@ -69,6 +69,9 @@ class Square
     @piece&.draw_possible_moves
   end
 
+  def get_square(row, column)
+    @board.squares[row][column]
+  end
 
   def draw_rect_outline(x, y, width, height, color, z=0, mode=:default, thickness=2)
     thickness.times do |i|
@@ -79,17 +82,39 @@ class Square
     end
   end
 
-  # def row
-  #   @board.squares[@row]
-  # end
+  def row_squares
+    @board.squares[@row]
+  end
 
-  def column
+  def column_squares
     group = []
     @board.squares.each do |row|
       group << row[@col]
     end
     group
   end
+
+  # escrever uma função que receba um [i][j] e e retorne a lista de 
+  # squares em uma dada direção. Por exemplo: direção cima, ou baixo, ou 
+  # direita e cima. Essa função vai ser importante pra ver o que a peça enxerga.
+  
+  def line_squares(direction)
+    group = []
+    ChessTools.get_line_coord([@row, @col], direction).each do |row, column|
+      group << @board.squares[row][column]
+    end
+    group
+  end
+
+
+
+  # def double_diagonal_squares
+  #   group = []
+  #   ChessTools.get_double_diagonal(@row, @col).each do |row, column|
+  #     group << @board.squares[column][row]
+  #   end
+  #   group
+  # end
 
   def draw_square
     Gosu.draw_rect(
@@ -100,6 +125,7 @@ class Square
       @color 
     )
   end
+
 
   def draw_highlight(color)
     draw_rect_outline(

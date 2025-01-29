@@ -11,31 +11,6 @@ class Board
     @player_turn = 'white'
   end
 
-  # def generate_squares
-  #   group = []
-  #   8.times do |row|
-  #     row_arr = []
-  #     8.times do |col|
-  #       row_arr << Square.new(row, col, self)
-  #     end
-  #     group << row_arr 
-  #   end
-  #   group
-  # end
-
-  def draw_highlight_squares(squares)
-    squares.each do |square|
-      Gosu.draw_rect(
-        square.position[0],
-        square.position[1],
-        SQUARE_SIZE,
-        SQUARE_SIZE,
-        Gosu::Color::WHITE,
-        2,
-        :default
-      )
-    end
-  end
 
   def draw
     @squares.each do |row|
@@ -43,6 +18,18 @@ class Board
         square.draw
       end
     end
-    draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].column) if @clicked_piece
+
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([1,1])) if @clicked_piece
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([0,1])) if @clicked_piece
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([1,0])) if @clicked_piece
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([-1,0])) if @clicked_piece
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([0,-1])) if @clicked_piece
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([-1,-1])) if @clicked_piece
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([1,-1])) if @clicked_piece
+    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([-1,1])) if @clicked_piece
+
+    # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].row_squares) if @clicked_piece
+    # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].double_diagonal_squares) if @clicked_piece
+
   end
 end
