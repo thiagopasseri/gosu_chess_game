@@ -106,6 +106,8 @@ class Square
     group
   end
 
+  
+
 
 
   # def double_diagonal_squares

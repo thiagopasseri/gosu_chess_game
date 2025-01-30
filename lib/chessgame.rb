@@ -4,7 +4,10 @@ class ChessGame < Gosu::Window
   def initialize
     super 640, 480
     self.caption = "Meu Jogo com Gosu"
+    self.update_interval = 42
+
     @board = Board.new
+    
 
   end
 
@@ -27,7 +30,7 @@ class ChessGame < Gosu::Window
       close
 
     when Gosu::KB_SPACE
-      @piece.move(@piece.seen_square([-1,0]))
+      # @piece.move(@piece.seen_square([-1,0]))
 
     when Gosu::MS_LEFT # Verifica botão esquerdo do mouse
         manage_mouse_click
@@ -46,7 +49,7 @@ class ChessGame < Gosu::Window
             @board.clicked_piece.move(square) 
             square.piece.is_clicked = false
             @board.clicked_piece = nil
-            @board.player_turn = @board.player_turn == 'white' ? 'black' : 'white' 
+            @board.player_turn = @board.player_turn == :white ? :black : :white 
           elsif square.piece
             @board.clicked_piece.is_clicked = false
             square.piece.is_clicked = true

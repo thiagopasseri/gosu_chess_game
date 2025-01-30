@@ -2,7 +2,7 @@ class Bishop < Piece
   
   def initialize(square = nil)
     super
-    @image = @color == 'white' ? Gosu::Image.new('media/Chess_blt60.png') : Gosu::Image.new('media/Chess_bdt60.png')
+    @image = Resources::IMAGES[:pieces][@color][:bishop]
   end
 
   def draw

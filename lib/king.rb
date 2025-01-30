@@ -2,7 +2,7 @@ class King < Piece
   
   def initialize(square = nil)
     super
-    @image = @color == 'white' ? Gosu::Image.new('media/Chess_klt60.png') : Gosu::Image.new('media/Chess_kdt60.png')
+    @image = Resources::IMAGES[:pieces][@color][:king]
   end
 
   def draw

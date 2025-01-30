@@ -38,6 +38,8 @@ module ChessTools
     line
   end
 
+  
+
   def self.get_knight_moves_coord(row, column)
     arr = []
     [-2, 2].each do |big_step|

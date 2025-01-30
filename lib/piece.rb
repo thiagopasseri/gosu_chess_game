@@ -11,9 +11,9 @@ class Piece
 
   def get_color
     if @square.row <= 1
-      return 'black'
+      return :black
     elsif @square.row >= 6
-      return 'white'
+      return :white
     else
       return nil
     end

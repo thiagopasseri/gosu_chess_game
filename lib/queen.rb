@@ -1,8 +1,11 @@
+# require_relative '../config/resources'
+
+
 class Queen < Piece
   
   def initialize(square = nil)
     super
-    @image = @color == 'white' ? Gosu::Image.new('media/Chess_qlt60.png') : Gosu::Image.new('media/Chess_qdt60.png')
+    @image = Resources::IMAGES[:pieces][@color][:queen]
   end
 
   def draw

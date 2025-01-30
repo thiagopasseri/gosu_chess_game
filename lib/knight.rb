@@ -2,7 +2,7 @@ class Knight < Piece
   
   def initialize(square = nil)
     super
-    @image = @color == 'white' ? Gosu::Image.new('media/Chess_nlt60.png') : Gosu::Image.new('media/Chess_ndt60.png')
+    @image = Resources::IMAGES[:pieces][@color][:knight]
     # @mov_vectors = [[2, 1], [2, -1], [1, 2], [-1, 2] ,[1, -2] ,[-1, -2], [-2, 1], [-2, -1]]
   end
 
