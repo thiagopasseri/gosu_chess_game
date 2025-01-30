@@ -97,7 +97,10 @@ module ChessTools
     row.between?(0,7) && column.between?(0,7)
   end
 
-
+  def self.opposite_color(color)
+   return :black if color == :white
+   return :white if color == :black
+  end
 end
 
 
