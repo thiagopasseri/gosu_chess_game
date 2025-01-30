@@ -19,7 +19,7 @@ class Board
       end
     end
 
-    ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([1,1])) if @clicked_piece
+    # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([1,1])) if @clicked_piece
 
     # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].row_squares) if @clicked_piece
     # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].double_diagonal_squares) if @clicked_piece

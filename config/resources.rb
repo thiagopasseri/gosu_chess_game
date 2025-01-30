@@ -30,7 +30,8 @@ module Resources
 }.freeze
 
   BOARD = {
-    square_size: 50
+    square_size: 50,
+    padding: 30
 }.freeze
 
 end

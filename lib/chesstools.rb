@@ -31,14 +31,50 @@ module ChessTools
   def self.get_line_coord(position,direction) # vetor direção [i,j]
     line = []
     step = 1
-    while (position[0] + direction[0] * step).between?(0,7) && (position[1] + direction[1] * step).between?(0,7)
+    while (position[0] + direction[0] * step).between?(0,7) && (position[1] + direction[1] * step).between?(0,7) do
       line << [position[0] + direction[0] * step, position[1] + direction[1] * step] 
       step += 1
     end
     line
   end
 
+
+  #pesquisar melhor forma de escrever esse while (pq nao da pra colocar numa variavel fora do while)
   
+  def self.get_seen_line_coord(row, column, direction, board)
+    line = []
+    step = 1
+
+    loop do
+      current_row = row + direction[0] * step
+      current_column = column + direction[1] * step
+
+      break unless in_board?(current_row, current_column)
+        
+      current_piece = get_piece(current_row, current_column, board)
+      initial_piece = get_piece(row, column, board)
+
+      if current_piece
+        if current_piece.color == initial_piece.color  
+          break
+        else
+          line << [current_row, current_column] 
+          break
+        end
+      else
+        line << [current_row, current_column]
+      end
+
+      step += 1
+    end
+
+    line
+  end
+  
+  def self.get_piece(row, column, board)
+    board.squares[row][column]&.piece
+  end
+
 
   def self.get_knight_moves_coord(row, column)
     arr = []

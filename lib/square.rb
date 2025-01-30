@@ -28,7 +28,7 @@ class Square
     @col = col
     @board = board
     @color = get_color
-    @position = [PADDING + @col * SQUARE_SIZE, PADDING + @row * SQUARE_SIZE]
+    @position = [Resources::BOARD[:padding] + @col * SQUARE_SIZE, Resources::BOARD[:padding] + @row * SQUARE_SIZE]
     @piece = get_piece
     @square_size = Resources::BOARD[:square_size]
   end
@@ -50,7 +50,6 @@ class Square
       when 4
         return King.new(self)
       end
-
       return nil
     end
   end
@@ -60,12 +59,12 @@ class Square
   end
 
   def rect
-    [PADDING + @col * @square_size, PADDING + @row * @square_size, @square_size, @square_size]
+    [Resources::BOARD[:padding] + @col * @square_size, Resources::BOARD[:padding] + @row * @square_size, @square_size, @square_size]
   end
 
   def draw
     draw_square
-    draw_highlight(Resources::COLORS[:gren]) if @piece&.is_clicked
+    draw_highlight(Resources::COLORS[:green]) if @piece&.is_clicked
     @piece&.draw
     @piece&.draw_possible_moves
   end
@@ -95,10 +94,6 @@ class Square
     group
   end
 
-  # escrever uma função que receba um [i][j] e e retorne a lista de 
-  # squares em uma dada direção. Por exemplo: direção cima, ou baixo, ou 
-  # direita e cima. Essa função vai ser importante pra ver o que a peça enxerga.
-  
   def line_squares(direction)
     group = []
     ChessTools.get_line_coord([@row, @col], direction).each do |row, column|
@@ -107,17 +102,15 @@ class Square
     group
   end
 
-  
-
-
-
-  # def double_diagonal_squares
-  #   group = []
-  #   ChessTools.get_double_diagonal(@row, @col).each do |row, column|
-  #     group << @board.squares[column][row]
-  #   end
-  #   group
-  # end
+  def seen_line_squares(direction)
+    group = []
+    ChessTools.get_seen_line_coord(@row, @col, direction, @board).each do |row, column|
+      group << @board.squares[row][column]
+    end
+    puts "seen_line_squares"
+    p group
+    group
+  end
 
   def draw_square
     Gosu.draw_rect(
@@ -129,19 +122,16 @@ class Square
     )
   end
 
-
   def draw_highlight(color)
     draw_rect_outline(
       position[0],
       position[1],
       @square_size,
       @square_size,
-      Resources::COLORS[:green],
+      color,
       1,
       :default,
       5
     ) 
   end
-    
-
 end

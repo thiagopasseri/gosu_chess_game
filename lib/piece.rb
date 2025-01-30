@@ -32,17 +32,7 @@ class Piece
     end
   end
 
-  # def seen_squares(group)
-  #   squares = []
-  #   group.each do |vector|
-  #     squares << seen_square(vector)
-  #   end
-  #   squares
-  # end
-
   def move(end_square)
-
-    puts "end_square - [#{end_square.row}][#{end_square.col}] - #{end_square.piece.class}"
 
     @square.piece = nil
     @square = end_square
