@@ -10,11 +10,11 @@ require_relative 'bishop'
 
 
 
-COR_CLIKED = Gosu::Color.rgba(255, 0, 0, 128)
-COR_COTTON = Gosu::Color.rgba(250, 244, 211, 200)
-COR_BUDDHA = Gosu::Color.rgba(189, 155, 25, 255)
-COR_LIGHTWOOD = Gosu::Color.rgba(130, 94, 92, 255)
-COR_GREEN = Gosu::Color.rgba(183, 244, 216, 255)
+# COR_CLIKED = Gosu::Color.rgba(255, 0, 0, 128)
+# COR_COTTON = Gosu::Color.rgba(250, 244, 211, 200)
+# COR_BUDDHA = Gosu::Color.rgba(189, 155, 25, 255)
+# COR_LIGHTWOOD = Gosu::Color.rgba(130, 94, 92, 255)
+# COR_GREEN = Gosu::Color.rgba(183, 244, 216, 255)
 SQUARE_SIZE = 50
 
 
@@ -30,6 +30,7 @@ class Square
     @color = get_color
     @position = [PADDING + @col * SQUARE_SIZE, PADDING + @row * SQUARE_SIZE]
     @piece = get_piece
+    @square_size = Resources::BOARD[:square_size]
   end
 
   def get_piece
@@ -55,16 +56,16 @@ class Square
   end
   
   def get_color
-    color = (@col + @row)%2 == 0 ? COR_COTTON : COR_LIGHTWOOD
+    color = (@col + @row)%2 == 0 ? Resources::COLORS[:cotton] : Resources::COLORS[:lightwood]
   end
 
   def rect
-    [PADDING + @col * SQUARE_SIZE, PADDING + @row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE]
+    [PADDING + @col * @square_size, PADDING + @row * @square_size, @square_size, @square_size]
   end
 
   def draw
     draw_square
-    draw_highlight(COR_GREEN) if @piece&.is_clicked
+    draw_highlight(Resources::COLORS[:gren]) if @piece&.is_clicked
     @piece&.draw
     @piece&.draw_possible_moves
   end
@@ -122,8 +123,8 @@ class Square
     Gosu.draw_rect(
       position[0],
       position[1],
-      SQUARE_SIZE,
-      SQUARE_SIZE,
+      @square_size,
+      @square_size,
       @color 
     )
   end
@@ -133,9 +134,9 @@ class Square
     draw_rect_outline(
       position[0],
       position[1],
-      SQUARE_SIZE,
-      SQUARE_SIZE,
-      COR_GREEN,
+      @square_size,
+      @square_size,
+      Resources::COLORS[:green],
       1,
       :default,
       5

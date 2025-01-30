@@ -18,5 +18,19 @@ module Resources
         king: Gosu::Image.new('media/Chess_kdt60.png')
       }
     }
-  }
+  }.freeze
+
+  COLORS = {
+    cliked: Gosu::Color.rgba(255, 0, 0, 128),
+    cotton: Gosu::Color.rgba(250, 244, 211, 200),
+    buddha: Gosu::Color.rgba(189, 155, 25, 255),
+    lightwood: Gosu::Color.rgba(130, 94, 92, 255),
+    green: Gosu::Color.rgba(183, 244, 216, 255),
+    square_size: 50
+}.freeze
+
+  BOARD = {
+    square_size: 50
+}.freeze
+
 end
