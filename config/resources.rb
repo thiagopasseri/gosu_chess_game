@@ -20,6 +20,12 @@ module Resources
     }
   }.freeze
 
+  SOUNDS = {
+    moving_click: Gosu::Sample.new('media/moving_click.wav'),
+    taking_click: Gosu::Sample.new('media/taking_click.wav')
+  }.freeze
+
+
   COLORS = {
     cliked: Gosu::Color.rgba(255, 0, 0, 128),
     cotton: Gosu::Color.rgba(250, 244, 211, 200),
@@ -27,11 +33,11 @@ module Resources
     lightwood: Gosu::Color.rgba(130, 94, 92, 255),
     green: Gosu::Color.rgba(183, 244, 216, 255),
     square_size: 50
-}.freeze
+  }.freeze
 
   BOARD = {
     square_size: 50,
     padding: 30
-}.freeze
+  }.freeze
 
 end

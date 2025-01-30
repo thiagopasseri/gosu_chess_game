@@ -1,3 +1,5 @@
+# require_relative '../config/resources'
+
 class Piece
 
   attr_accessor :is_clicked, :color, :square
@@ -33,6 +35,11 @@ class Piece
   end
 
   def move(end_square)
+    if end_square.piece.nil? 
+      Resources::SOUNDS[:moving_click].play
+    else
+      Resources::SOUNDS[:taking_click].play
+    end
 
     @square.piece = nil
     @square = end_square
