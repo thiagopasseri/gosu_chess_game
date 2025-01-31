@@ -21,7 +21,7 @@ module ChessTools
         square.position[1],
         SQUARE_SIZE,
         SQUARE_SIZE,
-        Gosu::Color.rgba(200, 200, 200, 128),
+        Gosu::Color.rgba(255, 0, 0, 80),
         2,
         :default
       )
