@@ -2,17 +2,22 @@ require_relative 'square'
 require_relative 'chesstools'
 
 class Board
-  attr_accessor :squares, :highlight_img, :clicked_piece, :player_turn, :kings
+  attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :kings
 
   def initialize(pieces = nil)
     @squares = ChessTools.generate_squares(self)
-    @highlight_img = Gosu::Image.new 'media/small_center_circle.png'
-    @clicked_piece = nil
-    @player_turn = :white
+
+    @white_player = Player.new(self, :white)
+    @black_player = Player.new(self, :black)
+
+    @focused_piece = nil
+    @current_player = @white_player
     @kings = {
       white: get_piece_by_name(:king)[:white],
       black: get_piece_by_name(:king)[:black]
     }
+    @highlight_img = Gosu::Image.new 'media/small_center_circle.png'
+
   end
 
 
@@ -23,9 +28,13 @@ class Board
       end
     end
 
-    ChessTools.draw_highlight_squares(all_seen_squares(@player_turn)) 
+    ChessTools.draw_highlight_squares(all_seen_squares(@current_player)) 
 
-    # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([1,1])) if @clicked_piece
+    # ChessTools.draw_highlight_squares(squares[@focused_piece.square.row][@focused_piece.square.col].line_squares([1,1])) if @focused_piece
+  end
+
+  def change_player
+    current_player = current_player == @white_player ? @black_player : @white_player
   end
 
   def get_piece_by_name(name)

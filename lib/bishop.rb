@@ -18,10 +18,8 @@ class Bishop < Piece
     group = []
 
     @directions.each do |direction|
-
       group += @square.seen_line_squares(direction)
     end
-
     group
   end
 end

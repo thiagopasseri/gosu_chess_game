@@ -2,12 +2,12 @@
 
 class Piece
 
-  attr_accessor :is_clicked, :color, :square
+  attr_accessor :is_focused, :color, :square
   
   def initialize(square = nil)
     @square = square
     @color = get_color
-    @is_clicked = false
+    @is_focused = false
     @image = nil
   end
 
@@ -23,6 +23,17 @@ class Piece
 
   def get_square(row, column)
     @square.board.squares[row][column]
+  end
+
+  def reset_focus
+    @is_focused = false
+    @square.board.focused_piece = nil
+  end
+
+  def change_focus(piece)
+    @is_focused = false
+    square.board.focused_piece = piece
+    piece.is_focused = true
   end
 
 
@@ -53,7 +64,7 @@ class Piece
   end
 
   def draw_seen_squares
-    if is_clicked
+    if is_focused
       seen_squares&.each do |square|
         @square.board.highlight_img.draw(square.position[0], square.position[1], 2, 0.0488, 0.0488, Gosu::Color::WHITE, :additive)
       end

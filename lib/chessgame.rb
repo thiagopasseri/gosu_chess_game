@@ -43,23 +43,28 @@ class ChessGame < Gosu::Window
   def manage_mouse_click
     @board.squares.flatten.each do |square|
       if mouse_over_area?(*square.rect) 
-        if @board.clicked_piece
-          if @board.clicked_piece&.seen_squares&.include?(square)
-            @board.clicked_piece.move(square) 
-            square.piece.is_clicked = false
-            @board.clicked_piece = nil
-            @board.player_turn = @board.player_turn == :white ? :black : :white 
-          elsif square.piece&.color == @board.clicked_piece.color
-            @board.clicked_piece.is_clicked = false
-            square.piece.is_clicked = true
-            @board.clicked_piece = square.piece
-          else     # fatorar esse métodos? tipo: reset_clicked, algo do tipo
-            @board.clicked_piece.is_clicked = nil
-            @board.clicked_piece = nil
+
+        if @board.focused_piece
+          if @board.focused_piece&.seen_squares&.include?(square)
+
+            @board.focused_piece.move(square) 
+            square.piece.reset_focus
+            @board.change_player
+
+          elsif square.piece&.color == @board.focused_piece.color
+
+            @board.focused_piece.change_focus(square.piece)
+            # @board.focused_piece.is_focused = false
+            # square.piece.is_focused = true
+            # @board.focused_piece = square.piece
+
+          else     # fatorar esse métodos? tipo: reset_focused, algo do tipo
+            @board.focused_piece = nil
           end
-        elsif square.piece && square.piece.color == @board.player_turn
-          square.piece.is_clicked = true
-          @board.clicked_piece = square.piece
+
+        elsif square.piece && square.piece.color == @board.current_player.color
+          square.piece.is_focused = true
+          @board.focused_piece = square.piece
         end
       end
     end

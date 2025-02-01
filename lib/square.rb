@@ -64,7 +64,7 @@ class Square
 
   def draw
     draw_square
-    draw_highlight(Resources::COLORS[:green]) if @piece&.is_clicked
+    draw_highlight(Resources::COLORS[:green]) if @piece&.is_focused
     @piece&.draw
     @piece&.draw_seen_squares
   end
