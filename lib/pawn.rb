@@ -5,10 +5,9 @@ class Pawn < Piece
   def initialize(square = nil)
     super
     @image = Resources::IMAGES[:pieces][@color][:pawn]
-    # @mov_vectors = [[1,0]]
   end
 
-  def possible_moves
+  def seen_squares
     free_square_moves + taking_moves
   end
 

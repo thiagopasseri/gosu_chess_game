@@ -11,7 +11,7 @@ class Rook < Piece
     @image.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
   end
 
-  def possible_moves
+  def seen_squares
     group = []
     @directions.each do |direction|
       group += @square.seen_line_squares(direction)

@@ -15,28 +15,4 @@ class Knight < Piece
     end
     moves
   end
-
-  def possible_moves 
-    seen_squares
-  end
-
-
-
-
-  # def possible_moves
-  #   moves = []
-  #   @mov_vectors.each do |vector|
-  #     if seen_square(vector)
-  #       target_square = get_square(@square.row + vector[0],@square.col + vector[1]) 
-  #     end
-  #     moves << target_square if target_square != nil
-  #   end
-  #   moves
-  # end
-
-  #terminei escrevendo possible_moves
-
-
-
-
 end

@@ -4,7 +4,7 @@ class ChessGame < Gosu::Window
   def initialize
     super 640, 480
     self.caption = "Meu Jogo com Gosu"
-    self.update_interval = 21
+    self.update_interval = 42
 
     @board = Board.new
     
@@ -44,12 +44,12 @@ class ChessGame < Gosu::Window
     @board.squares.flatten.each do |square|
       if mouse_over_area?(*square.rect) 
         if @board.clicked_piece
-          if @board.clicked_piece&.possible_moves&.include?(square)
+          if @board.clicked_piece&.seen_squares&.include?(square)
             @board.clicked_piece.move(square) 
             square.piece.is_clicked = false
             @board.clicked_piece = nil
             @board.player_turn = @board.player_turn == :white ? :black : :white 
-          elsif square.piece.color == @board.clicked_piece.color
+          elsif square.piece&.color == @board.clicked_piece.color
             @board.clicked_piece.is_clicked = false
             square.piece.is_clicked = true
             @board.clicked_piece = square.piece

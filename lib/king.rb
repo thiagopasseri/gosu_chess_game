@@ -11,7 +11,7 @@ class King < Piece
     @image.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
   end
 
-  def possible_moves
+  def seen_squares
     group = []
     @directions.each do |direction|
       target_row = @square.row + direction[0]

@@ -20,23 +20,16 @@ class Board
       end
     end
 
-    ChessTools.draw_highlight_squares(all_possible_moves(@player_turn)) 
+    ChessTools.draw_highlight_squares(all_seen_squares(@player_turn)) 
 
     # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].line_squares([1,1])) if @clicked_piece
-    # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].row_squares) if @clicked_piece
-    # ChessTools.draw_highlight_squares(squares[@clicked_piece.square.row][@clicked_piece.square.col].double_diagonal_squares) if @clicked_piece
   end
 
-
-  # terminei aqui: criando all_possible_moves
-  # proximo passo é saber se mover uma peça, rei vai estar dentro do possible moves
-  # fazer uma simulaçao, como se fosse
-  
-  def all_possible_moves(color)
+  def all_seen_squares(color)
     all = []
     @squares.flatten.each do |square| 
       if square.piece
-        all += square.piece.possible_moves if square.piece.color == color
+        all += square.piece.seen_squares if square.piece.color == color
       end
     end
     all

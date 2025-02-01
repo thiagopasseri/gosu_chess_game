@@ -51,16 +51,15 @@ class Piece
     @image&.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
   end
 
-  def draw_possible_moves
+  def draw_seen_squares
     if is_clicked
-      possible_moves&.each do |square|
+      seen_squares&.each do |square|
         @square.board.highlight_img.draw(square.position[0], square.position[1], 2, 0.0488, 0.0488, Gosu::Color::WHITE, :additive)
       end
     end
   end
 
-
-  def possible_moves
+  def seen_squares
     raise NotImplementedError, "As classes filhas devem implementar este método"
   end
 

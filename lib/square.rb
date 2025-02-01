@@ -66,7 +66,7 @@ class Square
     draw_square
     draw_highlight(Resources::COLORS[:green]) if @piece&.is_clicked
     @piece&.draw
-    @piece&.draw_possible_moves
+    @piece&.draw_seen_squares
   end
 
   def get_square(row, column)
@@ -107,8 +107,6 @@ class Square
     ChessTools.get_seen_line_coord(@row, @col, direction, @board).each do |row, column|
       group << @board.squares[row][column]
     end
-    puts "seen_line_squares"
-    p group
     group
   end
 
