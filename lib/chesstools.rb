@@ -101,6 +101,8 @@ module ChessTools
    return :black if color == :white
    return :white if color == :black
   end
+
+  
 end
 
 

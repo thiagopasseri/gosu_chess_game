@@ -1,10 +1,15 @@
 
 
 class Pawn < Piece
+
+  attr_accessor :name
+
   
   def initialize(square = nil)
     super
     @image = Resources::IMAGES[:pieces][@color][:pawn]
+    @name = :pawn
+
   end
 
   def seen_squares

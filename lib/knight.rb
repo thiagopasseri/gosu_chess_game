@@ -1,8 +1,12 @@
 class Knight < Piece
   
+  attr_accessor :name
+
   def initialize(square = nil)
     super
     @image = Resources::IMAGES[:pieces][@color][:knight]
+    @name = :knight
+
     # @mov_vectors = [[2, 1], [2, -1], [1, 2], [-1, 2] ,[1, -2] ,[-1, -2], [-2, 1], [-2, -1]]
   end
 

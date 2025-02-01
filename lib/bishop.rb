@@ -1,9 +1,13 @@
 class Bishop < Piece
   
+  attr_accessor :name
+
   def initialize(square = nil)
+
     super
     @image = Resources::IMAGES[:pieces][@color][:bishop]
     @directions = [[1, 1], [-1, 1], [1, -1], [-1, -1]]
+    @name = :bishop
   end
 
   def draw
