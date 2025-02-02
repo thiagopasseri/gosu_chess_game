@@ -21,7 +21,7 @@ SQUARE_SIZE = 50
 
 class Square
 
-  attr_accessor :row, :col, :piece, :position, :board
+  attr_accessor :row, :col, :piece, :position, :board, :square_size
   
   def initialize(row, col, board)
     @row = row

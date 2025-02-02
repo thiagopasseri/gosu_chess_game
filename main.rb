@@ -5,6 +5,8 @@ PADDING = 30
 require_relative './lib/board'
 require_relative './lib/chessgame'
 require_relative './lib/player'
+require_relative './lib/menu'
+
 
 require_relative './config/resources'
 

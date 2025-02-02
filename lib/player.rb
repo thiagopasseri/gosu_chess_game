@@ -1,6 +1,6 @@
 class Player
   
-  attr_accessor :color, :pieces
+  attr_accessor :color, :pieces, :king
 
   def initialize(board, color)
     @color = color
@@ -29,5 +29,6 @@ class Player
   def player_pieces_names
     player_pieces.map{|piece| piece.name} 
   end
+
 
 end

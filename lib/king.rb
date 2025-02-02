@@ -35,4 +35,14 @@ class King < Piece
     opposite_player.all_seen_squares.include?(@square)
   end
 
+  # consertar checking pieces
+  def checking_pieces_names
+    opposite_color = ChessTools.opposite_color(@color)
+    puts opposite_color
+    pieces_names = []
+    @square.board.players[opposite_color].player_pieces.each do |piece|
+      pieces_names << piece.name if piece.seen_squares.include?(@square)
+    end
+    pieces_names
+  end
 end

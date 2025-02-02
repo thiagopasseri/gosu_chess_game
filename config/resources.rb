@@ -33,7 +33,8 @@ module Resources
     lightwood: Gosu::Color.rgba(130, 94, 92, 255),
     green: Gosu::Color.rgba(183, 244, 216, 255),
     weak_red: Gosu::Color.rgba(255, 0, 0, 60),
-    weak_green: Gosu::Color.rgba(0, 255, 0, 60)
+    weak_green: Gosu::Color.rgba(0, 255, 0, 60),
+    menu_background: Gosu::Color.rgba(80, 80, 80, 255)
 
   }.freeze
 
