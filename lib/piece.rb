@@ -8,7 +8,7 @@ class Piece
     @square = square
     @color = get_color
     @is_focused = false
-    @image = nil
+    @pin_img = Resources::IMAGES[:symbols][:pin]
   end
 
   def get_color
@@ -61,10 +61,9 @@ class Piece
     end_square.piece = self 
   end
 
-
-
   def draw
     @image&.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
+    draw_pin
   end
 
   def draw_seen_squares
@@ -75,8 +74,20 @@ class Piece
     end
   end
 
+  def draw_pin
+    @pin_img.draw(@square.position[0], @square.position[1], 1, 0.1, 0.1) if is_pinned?
+  end
+
   def seen_squares
     raise NotImplementedError, "As classes filhas devem implementar este método"
+  end
+
+  def is_pinned?
+    initial_checking_pieces = @square.board.kings[@color].checking_pieces
+    @square.piece = nil
+    final_checking_pieces = @square.board.kings[@color].checking_pieces
+    @square.piece = self
+    return initial_checking_pieces != final_checking_pieces
   end
 
 end

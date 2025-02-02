@@ -6,7 +6,6 @@ class Player
     @color = color
     @board = board
     @king = board.get_piece_by_name(:king)[color]
-    @pieces = player_pieces
   end
 
 
@@ -28,6 +27,10 @@ class Player
 
   def player_pieces_names
     player_pieces.map{|piece| piece.name} 
+  end
+
+  def pinned_pieces
+    player_pieces.select { |piece| piece.is_pinned? }
   end
 
 

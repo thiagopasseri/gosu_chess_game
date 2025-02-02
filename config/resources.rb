@@ -17,6 +17,9 @@ module Resources
         queen: Gosu::Image.new('media/Chess_qdt60.png'),
         king: Gosu::Image.new('media/Chess_kdt60.png')
       }
+    },
+    symbols: {
+      pin: Gosu::Image.new('media/pin.png')
     }
   }.freeze
 
