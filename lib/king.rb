@@ -12,8 +12,10 @@ class King < Piece
   end
 
   def draw
-    @image.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
+    super
+    ChessTools.draw_highlight_squares(@square, Resources::COLORS[:weak_green]) if in_check?
   end
+
 
   def seen_squares
     group = []
@@ -28,6 +30,9 @@ class King < Piece
   end
 
   def in_check?
-    
+    opposite_color = ChessTools.opposite_color(@color)
+    opposite_player = @square.board.players[opposite_color]
+    opposite_player.all_seen_squares.include?(@square)
   end
+
 end

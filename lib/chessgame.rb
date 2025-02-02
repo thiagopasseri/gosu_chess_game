@@ -54,12 +54,9 @@ class ChessGame < Gosu::Window
           elsif square.piece&.color == @board.focused_piece.color
 
             @board.focused_piece.change_focus(square.piece)
-            # @board.focused_piece.is_focused = false
-            # square.piece.is_focused = true
-            # @board.focused_piece = square.piece
+          else     
 
-          else     # fatorar esse métodos? tipo: reset_focused, algo do tipo
-            @board.focused_piece = nil
+            @board.focused_piece.turn_off_focus
           end
 
         elsif square.piece && square.piece.color == @board.current_player.color

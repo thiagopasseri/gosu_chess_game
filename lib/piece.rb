@@ -36,6 +36,10 @@ class Piece
     piece.is_focused = true
   end
 
+  def turn_off_focus
+    @is_focused = false
+    @square.board.focused_piece = nil
+  end
 
   def seen_square(vector)
     if (@square.row + vector[0]).between?(0,7) && (@square.col + vector[1]).between?(0,7)

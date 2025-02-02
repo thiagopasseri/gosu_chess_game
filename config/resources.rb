@@ -32,7 +32,9 @@ module Resources
     buddha: Gosu::Color.rgba(189, 155, 25, 255),
     lightwood: Gosu::Color.rgba(130, 94, 92, 255),
     green: Gosu::Color.rgba(183, 244, 216, 255),
-    square_size: 50
+    weak_red: Gosu::Color.rgba(255, 0, 0, 60),
+    weak_green: Gosu::Color.rgba(0, 255, 0, 60)
+
   }.freeze
 
   BOARD = {
