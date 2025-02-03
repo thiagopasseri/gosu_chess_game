@@ -11,13 +11,31 @@ class Player
 
   def all_seen_squares
     all = []
-    @board.squares.flatten.each do |square| 
-      if square.piece
-        all += square.piece.seen_squares if square.piece.color == @color
-      end
+    player_pieces.each do |piece|
+      all += piece.seen_squares 
     end
     all
   end
+
+  def all_possible_moves
+    all = []
+    player_pieces.each do |piece|
+      all += piece.possible_moves
+    end
+    all
+  end
+
+  # def all_seen_squares
+  #   all = []
+  #   @board.squares.flatten.each do |square| 
+  #     if square.piece
+  #       all += square.piece.seen_squares if square.piece.color == @color
+  #     end
+  #   end
+  #   all
+  # end
+
+
 
   def player_pieces
     square_pieces = @board.squares.flatten.select { |square| square.piece && square.piece.color == @color }

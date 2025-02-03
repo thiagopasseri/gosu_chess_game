@@ -82,6 +82,13 @@ class Piece
     raise NotImplementedError, "As classes filhas devem implementar este método"
   end
 
+  
+  def possible_moves
+    unless @square.board.kings[@color].in_check?
+      seen_squares
+    end
+  end
+
   def is_pinned?
     initial_checking_pieces = @square.board.kings[@color].checking_pieces
     @square.piece = nil

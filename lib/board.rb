@@ -33,7 +33,7 @@ class Board
     end
 
     ChessTools.draw_highlight_squares(@current_player.all_seen_squares, Resources::COLORS[:weak_red]) 
-
+    ChessTools.draw_img_squares(@current_player.all_possible_moves, Resources::IMAGES[:symbols][:green_check])
     # ChessTools.draw_highlight_squares(squares[@focused_piece.square.row][@focused_piece.square.col].line_squares([1,1])) if @focused_piece
   end
 
@@ -47,15 +47,4 @@ class Board
     pieces_hash = pieces.each_with_object({}) {|piece, hash| hash[piece.color.to_sym] = piece}
     pieces_hash
   end
-
-  # def all_seen_squares(color)
-  #   all = []
-  #   @squares.flatten.each do |square| 
-  #     if square.piece
-  #       all += square.piece.seen_squares if square.piece.color == color
-  #     end
-  #   end
-  #   all
-  # end
-
 end

@@ -41,6 +41,12 @@ module ChessTools
       )
     end
   end
+
+  def self.draw_img_squares(squares, img)
+    Array(squares).each do |square|
+      img.draw(square.position[0], square.position[1], 1, 0.005, 0.005)
+    end
+  end
   
   def self.get_line_coord(position,direction) # vetor direção [i,j]
     line = []

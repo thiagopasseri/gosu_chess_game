@@ -19,7 +19,8 @@ module Resources
       }
     },
     symbols: {
-      pin: Gosu::Image.new('media/pin.png')
+      pin: Gosu::Image.new('media/pin.png'),
+      green_check: Gosu::Image.new('media/green_check.png')
     }
   }.freeze
 
