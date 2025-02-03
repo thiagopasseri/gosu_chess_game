@@ -4,7 +4,7 @@ require_relative 'chesstools'
 class Board
   attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :kings, :players, :menu
 
-  def initialize(pieces = nil)
+  def initialize
     @squares = ChessTools.generate_squares(self)
 
     @players = {
@@ -24,6 +24,11 @@ class Board
 
   end
 
+  def clear
+    @squares.flatten.each do |square|
+      square.piece = nil
+    end
+  end
 
   def draw
     @squares.each do |row|
@@ -34,6 +39,7 @@ class Board
 
     ChessTools.draw_highlight_squares(@current_player.all_seen_squares, Resources::COLORS[:weak_red]) 
     ChessTools.draw_img_squares(@current_player.all_possible_moves, Resources::IMAGES[:symbols][:green_check])
+
     # ChessTools.draw_highlight_squares(squares[@focused_piece.square.row][@focused_piece.square.col].line_squares([1,1])) if @focused_piece
   end
 

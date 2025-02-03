@@ -1,6 +1,9 @@
 require 'gosu'
 
 class ChessGame < Gosu::Window
+
+  attr_accessor :board
+
   def initialize
     super 840, 480
     self.caption = "Meu Jogo com Gosu"

@@ -64,6 +64,7 @@ class Piece
   def draw
     @image&.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
     draw_pin
+    draw_seen_squares
   end
 
   def draw_seen_squares
@@ -82,7 +83,7 @@ class Piece
     raise NotImplementedError, "As classes filhas devem implementar este método"
   end
 
-  
+
   def possible_moves
     unless @square.board.kings[@color].in_check?
       seen_squares

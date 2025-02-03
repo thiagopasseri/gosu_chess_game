@@ -66,7 +66,6 @@ class Square
     draw_square
     draw_highlight(Resources::COLORS[:green]) if @piece&.is_focused
     @piece&.draw
-    @piece&.draw_seen_squares
   end
 
   def get_square(row, column)
