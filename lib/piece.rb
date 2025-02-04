@@ -2,13 +2,13 @@
 
 class Piece
 
-  attr_accessor :is_focused, :color, :square
+  attr_accessor :is_focused, :color, :square, :pin_image
   
   def initialize(square = nil)
     @square = square
     @color = get_color
     @is_focused = false
-    @pin_img = Resources::IMAGES[:symbols][:pin]
+    @pin_image = Resources::IMAGES[:symbols][:pin]
   end
 
   def get_color
@@ -63,20 +63,20 @@ class Piece
 
   def draw
     @image&.draw(@square.position[0], @square.position[1], 1, 0.83, 0.83)
-    draw_pin
     draw_seen_squares
+    draw_pin
   end
 
   def draw_seen_squares
     if is_focused
       seen_squares&.each do |square|
-        @square.board.highlight_img.draw(square.position[0], square.position[1], 2, 0.0488, 0.0488, Gosu::Color::WHITE, :additive)
+        @square.board.highlight_img.draw(square.position[0], square.position[1], 1, 0.0488, 0.0488, Gosu::Color::WHITE, :additive)
       end
     end
   end
 
   def draw_pin
-    @pin_img.draw(@square.position[0], @square.position[1], 1, 0.1, 0.1) if is_pinned?
+    @pin_image.draw(@square.position[0], @square.position[1], 2, 0.05, 0.05) if is_pinned?
   end
 
   def seen_squares
@@ -90,23 +90,29 @@ class Piece
     else
       return seen_squares
     end
+    
+    # seen_squares.select do |square|
+    #   if square.piece
+    #     false 
+    #     next
+    #   end
+    #   move(square)
+    #   is_checked = @square.board.kings[@color].in_check?
+    #   move(@square)
+    #   !is_checked
+    # end
+    # seen_squares
   end
 
   def is_pinned?
     initial_checking_pieces = @square.board.kings[@color].checking_pieces
-    puts "piece name:#{@color} #{@name}"
-    puts "initial checking_piece"
-    puts initial_checking_pieces.map { |piece| piece.name  }.inspect
 
     @square.piece = nil
 
     final_checking_pieces = @square.board.kings[@color].checking_pieces
-    puts "final"
-    puts final_checking_pieces.map { |piece| piece.name  }.inspect
-
+  
     @square.piece = self
 
-    puts initial_checking_pieces != final_checking_pieces
     return initial_checking_pieces != final_checking_pieces
   end
 

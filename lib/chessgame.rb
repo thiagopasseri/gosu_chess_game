@@ -7,7 +7,7 @@ class ChessGame < Gosu::Window
   def initialize
     super 840, 480
     self.caption = "Meu Jogo com Gosu"
-    self.update_interval = 42
+    self.update_interval = 21
 
     @board = Board.new
     

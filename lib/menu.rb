@@ -45,6 +45,8 @@ class Menu
     Pinned white Pieces: #{@board.players[:white].pinned_pieces_names.inspect}
     Pinned black Pieces: #{@board.players[:black].pinned_pieces_names.inspect}
 
+    white queen pinned: #{@board.get_piece_by_name(:queen)[:white]&.is_pinned?}
+    black queen pinned: #{@board.get_piece_by_name(:queen)[:black]&.is_pinned?}
     TEXT
   end
 end

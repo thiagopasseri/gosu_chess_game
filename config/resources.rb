@@ -1,4 +1,6 @@
 module Resources
+
+  
   IMAGES = {
     pieces: {
       white: {
@@ -20,7 +22,8 @@ module Resources
     },
     symbols: {
       pin: Gosu::Image.new('media/pin.png'),
-      green_check: Gosu::Image.new('media/green_check.png')
+      green_check: Gosu::Image.new('media/green_check.png'),
+      red_check: Gosu::Image.new('media/red_check.png')
     }
   }.freeze
 

@@ -8,12 +8,14 @@ class King < Piece
     @image = Resources::IMAGES[:pieces][@color][:king]
     @directions = [[1, 0], [0, 1], [-1, 0], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]]
     @name = :king
+    @check_image = Resources::IMAGES[:symbols][:red_check]
+
 
   end
 
   def draw
     super
-    ChessTools.draw_highlight_squares(@square, Resources::COLORS[:weak_green]) if in_check?
+    @check_image.draw(@square.position[0], @square.position[1], 1, 0.04, 0.04) if in_check?
   end
 
 
@@ -39,7 +41,8 @@ class King < Piece
     opposite_color = ChessTools.opposite_color(@color)
     pieces = []
     @square.board.players[opposite_color].player_pieces.each do |piece|
-      pieces << piece if piece.seen_squares.include?(@square)
+      next if piece.name == :king
+      pieces << piece if piece.seen_squares.include?(@square) 
     end
     pieces
   end

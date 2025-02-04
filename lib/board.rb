@@ -14,14 +14,9 @@ class Board
     @current_player = @players[:white]
 
     @focused_piece = nil
-    # @kings = {
-    #   white: get_piece_by_name(:king)[:white],
-    #   black: get_piece_by_name(:king)[:black]
-    # }
 
     @menu = Menu.new(self)
     @highlight_img = Gosu::Image.new 'media/small_center_circle.png'
-
   end
 
   def kings
