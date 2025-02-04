@@ -53,4 +53,8 @@ class King < Piece
     end
     pieces_names
   end
+
+  def is_pinned?
+    false
+  end
 end

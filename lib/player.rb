@@ -1,13 +1,16 @@
 class Player
   
-  attr_accessor :color, :pieces, :king
+  attr_accessor :color, :pieces
 
   def initialize(board, color)
     @color = color
     @board = board
-    @king = board.get_piece_by_name(:king)[color]
   end
 
+
+  def king 
+    @board.get_piece_by_name(:king)[color]
+  end
 
   def all_seen_squares
     all = []
@@ -49,6 +52,10 @@ class Player
 
   def pinned_pieces
     player_pieces.select { |piece| piece.is_pinned? }
+  end
+
+  def pinned_pieces_names
+    pinned_pieces.map { |piece| piece.name }
   end
 
 

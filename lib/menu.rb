@@ -39,8 +39,11 @@ class Menu
   def get_text
     <<~TEXT
     Focused Piece: #{@board.focused_piece}
+    - possible_moves: #{@board.focused_piece&.possible_moves.inspect}
     White checks: #{@board.players[:white].king.checking_pieces_names.inspect}
     Black checks: #{@board.players[:black].king.checking_pieces_names.inspect}
+    Pinned white Pieces: #{@board.players[:white].pinned_pieces_names.inspect}
+    Pinned black Pieces: #{@board.players[:black].pinned_pieces_names.inspect}
 
     TEXT
   end

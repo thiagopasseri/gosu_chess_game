@@ -85,16 +85,28 @@ class Piece
 
 
   def possible_moves
-    unless @square.board.kings[@color].in_check?
-      seen_squares
+    if is_pinned?
+      return []
+    else
+      return seen_squares
     end
   end
 
   def is_pinned?
     initial_checking_pieces = @square.board.kings[@color].checking_pieces
+    puts "piece name:#{@color} #{@name}"
+    puts "initial checking_piece"
+    puts initial_checking_pieces.map { |piece| piece.name  }.inspect
+
     @square.piece = nil
+
     final_checking_pieces = @square.board.kings[@color].checking_pieces
+    puts "final"
+    puts final_checking_pieces.map { |piece| piece.name  }.inspect
+
     @square.piece = self
+
+    puts initial_checking_pieces != final_checking_pieces
     return initial_checking_pieces != final_checking_pieces
   end
 

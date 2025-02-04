@@ -49,7 +49,7 @@ class ChessGame < Gosu::Window
       if mouse_over_area?(*square.rect) 
 
         if @board.focused_piece
-          if @board.focused_piece&.seen_squares&.include?(square)
+          if @board.focused_piece&.possible_moves&.include?(square)
 
             @board.focused_piece.move(square) 
             square.piece.reset_focus

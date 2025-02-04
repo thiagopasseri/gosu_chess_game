@@ -2,7 +2,7 @@ require_relative 'square'
 require_relative 'chesstools'
 
 class Board
-  attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :kings, :players, :menu
+  attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :players, :menu
 
   def initialize
     @squares = ChessTools.generate_squares(self)
@@ -14,16 +14,24 @@ class Board
     @current_player = @players[:white]
 
     @focused_piece = nil
-    @kings = {
-      white: get_piece_by_name(:king)[:white],
-      black: get_piece_by_name(:king)[:black]
-    }
+    # @kings = {
+    #   white: get_piece_by_name(:king)[:white],
+    #   black: get_piece_by_name(:king)[:black]
+    # }
 
     @menu = Menu.new(self)
     @highlight_img = Gosu::Image.new 'media/small_center_circle.png'
 
   end
 
+  def kings
+    {
+      white: get_piece_by_name(:king)[:white],
+      black: get_piece_by_name(:king)[:black]
+    }
+  end
+
+  
   def clear
     @squares.flatten.each do |square|
       square.piece = nil
