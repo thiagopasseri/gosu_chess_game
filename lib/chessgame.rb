@@ -10,14 +10,24 @@ class ChessGame < Gosu::Window
     self.update_interval = 400
 
     @board = Board.new
-    
 
+    @game_state = :menu
+    @main_menu = MainMenu.new(self)
   end
 
   def draw
-    @board.draw
-    @board.menu.draw
-    @board.play_next_move
+    case @game_state
+    when :menu
+      @main_menu.draw
+    when :game
+      @board.draw
+      @board.menu.draw
+      # @board.play_next_move
+    end
+  end
+
+  def update
+    @main_menu.update if @game_state == :menu
   end
 
   def mouse_over_area?(x, y, width, height)
@@ -30,19 +40,39 @@ class ChessGame < Gosu::Window
   end
 
   def button_down(button_id)
-    case button_id
-    when Gosu::KB_ESCAPE
-      close
+    case @game_state
+    when :menu
+      @main_menu.button_down(button_id)
 
-    when Gosu::KB_SPACE
-      # @piece.move(@piece.seen_square([-1,0]))
-
-    when Gosu::MS_LEFT # Verifica botão esquerdo do mouse
-        manage_mouse_click
-
-    else
-      super
+    when :game
+      case button_id
+      when Gosu::KB_ESCAPE
+        close
+  
+      when Gosu::KB_SPACE
+  
+      when Gosu::MS_LEFT # Verifica botão esquerdo do mouse
+          manage_mouse_click
+      else
+        super
+      end
     end
+  end
+
+  def start_new_game
+    @board = Board.new
+    @game_state = :game
+  end
+
+  def load_game(save_file)
+    # Implemente aqui a lógica para carregar um jogo salvo
+    file_content = File.read(File.join("saves", save_file))
+
+    loaded_history = JSON.parse(file_content)
+    @board = Board.new
+    @board.play_all_history(loaded_history)
+    @game_state = :game
+
   end
 
   def manage_mouse_click

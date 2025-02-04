@@ -6,6 +6,8 @@ require_relative './lib/board'
 require_relative './lib/chessgame'
 require_relative './lib/player'
 require_relative './lib/menu'
+require_relative './lib/mainmenu'
+require 'json'
 
 
 require_relative './config/resources'
