@@ -7,7 +7,7 @@ class ChessGame < Gosu::Window
   def initialize
     super 840, 480
     self.caption = "Meu Jogo com Gosu"
-    self.update_interval = 21
+    self.update_interval = 400
 
     @board = Board.new
     
@@ -17,6 +17,7 @@ class ChessGame < Gosu::Window
   def draw
     @board.draw
     @board.menu.draw
+    @board.play_next_move
   end
 
   def mouse_over_area?(x, y, width, height)

@@ -122,6 +122,14 @@ module ChessTools
    return :white if color == :black
   end
 
+  def self.play_move_sound(end_square)
+    if end_square.piece.nil? 
+      Resources::SOUNDS[:moving_click].play
+    else
+      Resources::SOUNDS[:taking_click].play
+    end
+  end
+
 end
 
 

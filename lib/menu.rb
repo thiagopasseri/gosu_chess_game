@@ -47,6 +47,8 @@ class Menu
 
     white queen pinned: #{@board.get_piece_by_name(:queen)[:white]&.is_pinned?}
     black queen pinned: #{@board.get_piece_by_name(:queen)[:black]&.is_pinned?}
+
+    GameHistory: #{@board.history.inspect}
     TEXT
   end
 end

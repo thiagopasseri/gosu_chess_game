@@ -2,7 +2,7 @@ require_relative 'square'
 require_relative 'chesstools'
 
 class Board
-  attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :players, :menu
+  attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :players, :menu, :history, :current_history
 
   def initialize
     @squares = ChessTools.generate_squares(self)
@@ -17,6 +17,8 @@ class Board
 
     @menu = Menu.new(self)
     @highlight_img = Gosu::Image.new 'media/small_center_circle.png'
+    @history = []
+    @current_history = @history
   end
 
   def kings
@@ -25,6 +27,39 @@ class Board
       black: get_piece_by_name(:king)[:black]
     }
   end
+
+  def refresh
+    initialize
+  end
+
+  def play_all_history(history)
+    refresh
+    history.each do |initial_coord, final_coord|
+      p initial_coord
+      p final_coord
+      initial_square = @squares[initial_coord[0]][initial_coord[1]]
+      final_square = @squares[final_coord[0]][final_coord[1]]
+      
+      initial_square.piece.move(final_square)
+    end
+  end
+
+  def play_next_move
+    if @current_history.size != 0
+      puts "teeeeste"
+      puts @current_history.size
+      current_move_coord = @current_history.shift
+
+      initial_coord = current_move_coord[0]
+      final_coord = current_move_coord[1]
+  
+      initial_square = @squares[initial_coord[0]][initial_coord[1]]
+      final_square = @squares[final_coord[0]][final_coord[1]]
+  
+      initial_square.piece.move(final_square)
+    end
+  end
+
 
   
   def clear

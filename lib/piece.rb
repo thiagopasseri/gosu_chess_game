@@ -50,12 +50,12 @@ class Piece
   end
 
   def move(end_square)
-    if end_square.piece.nil? 
-      Resources::SOUNDS[:moving_click].play
-    else
-      Resources::SOUNDS[:taking_click].play
-    end
 
+    ChessTools.play_move_sound(end_square)
+
+    @square.board.history << [[@square.row, @square.col], [end_square.row, end_square.col]]
+    
+    p @square.board.history
     @square.piece = nil
     @square = end_square
     end_square.piece = self 
