@@ -29,28 +29,71 @@ class Square
     @board = board
     @color = get_color
     @position = [Resources::BOARD[:padding] + @col * SQUARE_SIZE, Resources::BOARD[:padding] + @row * SQUARE_SIZE]
-    @piece = get_piece
+    @piece = nil
     @square_size = Resources::BOARD[:square_size]
   end
 
-  def get_piece
+  def setup_piece(piece_type)
+    @piece = case piece_type
+    when :king
+      King.new(self)
+    when :queen
+      Queen.new(self)
+    when :rook
+      Rook.new(self)
+    when :bishop
+      Bishop.new(self)
+    when :knight
+      Knight.new(self)
+    when :pawn
+      Pawn.new(self)
+    else
+      nil
+    end
+  end
+
+
+  def setup_default_piece
     return nil if @row.between?(2,5) 
-    if @row == 1 || @row == 6
-      return Pawn.new(self)
+    @piece = if @row == 1 || @row == 6
+      Pawn.new(self)
     elsif @row == 0 || @row == 7
       case @col
       when 0, 7
-        return Rook.new(self)
+        Rook.new(self)
       when 1, 6
-        return Knight.new(self)
+        Knight.new(self)
       when 2, 5
-        return Bishop.new(self)
+        Bishop.new(self)
       when 3
-        return Queen.new(self)
+        Queen.new(self)
       when 4
-        return King.new(self)
+        King.new(self)
       end
-      return nil
+    end
+  end
+
+  def get_piece
+    if @board.initial_condition.nil?
+      puts "board initial condition: #{@board.initial_condition} #{@board.initial_condition.class}"
+      return nil if @row.between?(2,5) 
+      if @row == 1 || @row == 6
+        return Pawn.new(self)
+      elsif @row == 0 || @row == 7
+        case @col
+        when 0, 7
+          return Rook.new(self)
+        when 1, 6
+          return Knight.new(self)
+        when 2, 5
+          return Bishop.new(self)
+        when 3
+          return Queen.new(self)
+        when 4
+          return King.new(self)
+        end
+        return nil
+      end
     end
   end
   

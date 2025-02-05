@@ -2,10 +2,12 @@ require_relative 'square'
 require_relative 'chesstools'
 
 class Board
-  attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :players, :menu, :history, :current_history
+  attr_accessor :squares, :highlight_img, :focused_piece, :current_player, :players, :menu, :history, :current_history, :initial_condition
 
-  def initialize
+  def initialize(initial_condition = nil)
+    # @initial_condition = initial_condition
     @squares = ChessTools.generate_squares(self)
+    setup_pieces(initial_condition) #inicializa as pieces
 
     @players = {
       white: Player.new(self, :white),
@@ -19,6 +21,19 @@ class Board
     @highlight_img = Gosu::Image.new 'media/small_center_circle.png'
     @history = []
     @current_history = @history
+  end
+
+  def setup_pieces(initial_condition)
+    @squares.each_with_index do |row, row_index|
+      row.each_with_index do |square, col_index|
+        if initial_condition
+          piece_type = initial_condition[[row_index, col_index]]
+          square.setup_piece(piece_type) if piece_type
+        else
+          square.setup_default_piece
+        end
+      end
+    end
   end
 
   def kings
