@@ -7,7 +7,7 @@ class ChessGame < Gosu::Window
   def initialize
     super 840, 480
     self.caption = "Meu Jogo com Gosu"
-    self.update_interval = 42
+    self.update_interval = 200
 
     @board = Board.new
 
@@ -22,7 +22,6 @@ class ChessGame < Gosu::Window
     when :game
       @board.draw
       @board.menu.draw
-      # @board.play_next_move
     end
   end
 
@@ -53,6 +52,9 @@ class ChessGame < Gosu::Window
   
       when Gosu::MS_LEFT # Verifica botão esquerdo do mouse
           manage_mouse_click
+      
+      when Gosu::KB_Z
+        @board.undo_move
       else
         super
       end
@@ -71,29 +73,8 @@ class ChessGame < Gosu::Window
     # 1. Lê e faz parse do JSON
     initial_condition = JSON.parse(file_content)
 
-    # 2. Converte os valores (como "king", "queen") para símbolos (:king, :queen)
-    initial_condition.transform_values!(&:to_sym)
-
-    # 3. Converte as chaves de "[0, 4]" para [0, 4]
-    initial_condition.transform_keys! do |key|
-      key.gsub(/[\[\]]/, '')  # Remove os colchetes
-          .split(',')         # Divide por vírgula
-          .map(&:to_i)        # Converte cada string para inteiro
-    end
- 
-    if initial_condition.class == Array
-      puts "foi array"
-      @board = Board.new
-      @board.play_all_history(initial_condition)
-      @game_state = :game
-    elsif initial_condition.class == Hash
-      puts "foi hash"
-      initial_condition.transform_values!(&:to_sym)
-      @board = Board.new(initial_condition)
-      @game_state = :game
-    else
-      puts "file nao foi carregado"
-    end
+    @board = Board.new(initial_condition)
+    @game_state = :game
 
   end
 

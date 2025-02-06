@@ -11,7 +11,7 @@ class Knight < Piece
   end
 
 
-  def seen_squares
+  def calculate_seen_squares
     moves = []
     ChessTools.get_knight_moves_coord(@square.row, @square.col).each do |row, column|
       target_square = get_square(row, column)

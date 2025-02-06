@@ -16,7 +16,7 @@ class Queen < Piece
   end
 
 
-  def seen_squares
+  def calculate_seen_squares
     group = []
     @directions.each do |direction|
       group += @square.seen_line_squares(direction)

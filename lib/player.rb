@@ -8,14 +8,14 @@ class Player
   end
 
 
-  def king 
-    @board.get_piece_by_name(:king)[color]
+  def king
+    @king ||= @board.kings[@color]
   end
 
   def all_seen_squares
     all = []
     player_pieces.each do |piece|
-      all += piece.seen_squares 
+      all += piece.calculate_seen_squares
     end
     all
   end
@@ -27,18 +27,6 @@ class Player
     end
     all
   end
-
-  # def all_seen_squares
-  #   all = []
-  #   @board.squares.flatten.each do |square| 
-  #     if square.piece
-  #       all += square.piece.seen_squares if square.piece.color == @color
-  #     end
-  #   end
-  #   all
-  # end
-
-
 
   def player_pieces
     square_pieces = @board.squares.flatten.select { |square| square.piece && square.piece.color == @color }

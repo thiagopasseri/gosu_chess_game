@@ -9,8 +9,6 @@ class King < Piece
     @directions = [[1, 0], [0, 1], [-1, 0], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]]
     @name = :king
     @check_image = Resources::IMAGES[:symbols][:red_check]
-
-
   end
 
   def draw
@@ -19,7 +17,7 @@ class King < Piece
   end
 
 
-  def seen_squares
+  def calculate_seen_squares
     group = []
     @directions.each do |direction|
       target_row = @square.row + direction[0]
@@ -42,7 +40,7 @@ class King < Piece
     pieces = []
     @square.board.players[opposite_color].player_pieces.each do |piece|
       next if piece.name == :king
-      pieces << piece if piece.seen_squares.include?(@square) 
+      pieces << piece if piece.calculate_seen_squares.include?(@square) 
     end
     pieces
   end
@@ -52,7 +50,7 @@ class King < Piece
     opposite_color = ChessTools.opposite_color(@color)
     pieces_names = []
     @square.board.players[opposite_color].player_pieces.each do |piece|
-      pieces_names << piece.name if piece.seen_squares.include?(@square)
+      pieces_names << piece.name if piece.calculate_seen_squares.include?(@square)
     end
     pieces_names
   end

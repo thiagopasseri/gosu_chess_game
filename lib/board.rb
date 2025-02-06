@@ -7,6 +7,7 @@ class Board
   def initialize(initial_condition = nil)
     # @initial_condition = initial_condition
     @squares = ChessTools.generate_squares(self)
+
     setup_pieces(initial_condition) #inicializa as pieces
 
     @players = {
@@ -24,12 +25,30 @@ class Board
   end
 
   def setup_pieces(initial_condition)
-    @squares.each_with_index do |row, row_index|
-      row.each_with_index do |square, col_index|
-        if initial_condition
+    if initial_condition.class == Array
+      initialize
+      play_all_history(initial_condition)
+      
+    elsif initial_condition.class == Hash
+      # 2. Converte os valores (como "king", "queen") para símbolos (:king, :queen)
+      initial_condition.transform_values!(&:to_sym)
+
+      # 3. Converte as chaves de "[0, 4]" para [0, 4]
+      initial_condition.transform_keys! do |key|
+        key.gsub(/[\[\]]/, '')  # Remove os colchetes
+            .split(',')         # Divide por vírgula
+            .map(&:to_i)        # Converte cada string para inteiro
+      end
+
+      squares.each_with_index do |row, row_index|
+        row.each_with_index do |square, col_index|
           piece_type = initial_condition[[row_index, col_index]]
           square.setup_piece(piece_type) if piece_type
-        else
+        end
+      end
+    else
+      squares.each_with_index do |row, row_index|
+        row.each_with_index do |square, col_index|
           square.setup_default_piece
         end
       end
@@ -50,13 +69,17 @@ class Board
   def play_all_history(history)
     refresh
     history.each do |initial_coord, final_coord|
-      p initial_coord
-      p final_coord
       initial_square = @squares[initial_coord[0]][initial_coord[1]]
       final_square = @squares[final_coord[0]][final_coord[1]]
+    
+      initial_square.piece.move(final_square, true)
+      sleep(0.2)
       
-      initial_square.piece.move(final_square)
     end
+  end
+
+  def undo_move
+    play_all_history(@history[0...-1])
   end
 
   def play_next_move
@@ -74,7 +97,6 @@ class Board
       initial_square.piece.move(final_square)
     end
   end
-
 
   
   def clear

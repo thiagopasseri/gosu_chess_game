@@ -12,7 +12,7 @@ class Pawn < Piece
 
   end
 
-  def seen_squares
+  def calculate_seen_squares
     free_square_moves + taking_moves
   end
 
