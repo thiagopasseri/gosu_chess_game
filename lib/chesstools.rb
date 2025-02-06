@@ -14,20 +14,6 @@ module ChessTools
     group
   end
 
-  # def self.draw_highlight_squares(squares)
-  #   Array(squares).each do |square|
-  #     Gosu.draw_rect(
-  #       square.position[0],
-  #       square.position[1],
-  #       SQUARE_SIZE,
-  #       SQUARE_SIZE,
-  #       Gosu::Color.rgba(255, 0, 0, 60),
-  #       2,
-  #       :default
-  #     )
-  #   end
-  # end
-
   def self.draw_highlight_squares(squares, color)
     Array(squares).each do |square|
       Gosu.draw_rect(

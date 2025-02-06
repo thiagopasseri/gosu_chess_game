@@ -151,7 +151,7 @@ class Piece
 
     return initial_checking_pieces != final_checking_pieces
   end
-
+  
   def board_state_hash
     puts "calculou o HASH"
     # Cria uma string única representando o estado atual do tabuleiro
